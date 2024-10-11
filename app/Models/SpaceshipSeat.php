@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class SpaceshipSeat extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'at_window',
+        'row',
+        'spaceship_id'
+    ];
 }
