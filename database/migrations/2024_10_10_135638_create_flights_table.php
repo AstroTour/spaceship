@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('flight_number', 100);
             $table->unsignedBigInteger('spaceship_id');
-            $table->unsignedTinyInteger('departure_space_id');
-            $table->unsignedBigInteger('destination_space_id');
+            $table->unsignedTinyInteger('departure_spaceport_id');
+            $table->unsignedBigInteger('destination_spaceport_id');
             $table->timestamp('departure_time');
             $table->timestamp('arrival_time');
             $table->timestamps();
