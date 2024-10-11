@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BoardingPass extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'passenger_id',
+        'secret',
+        'checked_in'
+    ];
 }
