@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('boarding_passes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('passenger_id');
-            $table->string('secret_pass');
-            $table->boolean('checked_in');
+            $table->unsignedBigInteger('passenger_id')->index();
+            $table->tinyText('secret_pass');
+            $table->boolean('checked_in')->default(false)->index();
             $table->timestamps();
         });
     }

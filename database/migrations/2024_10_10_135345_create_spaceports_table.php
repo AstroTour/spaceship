@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('spaceports', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->unsignedBigInteger('planet_id');
-            $table->boolean('active');
+            $table->unsignedBigInteger('planet_id')->index();
+            $table->boolean('active')->default(true)->index();
             $table->timestamps();
         });
     }

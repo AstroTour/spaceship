@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('spaceships', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->unsignedSmallInteger('min_pilots');
-            $table->unsignedSmallInteger('min_service_staff');
-            $table->unsignedSmallInteger('capacity');
+            $table->string('name', 100)->unique();
+            $table->unsignedSmallInteger('min_pilots')->default(1);
+            $table->unsignedSmallInteger('min_service_staff')->default(0);
+            $table->unsignedSmallInteger('capacity')->default(1);
             $table->timestamps();
         });
     }
