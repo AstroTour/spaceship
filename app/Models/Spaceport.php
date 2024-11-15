@@ -11,7 +11,6 @@ class Spaceport extends Model
 
     protected $fillable=[
         'name',
-        'planet_id',
-        'active'
+        'planet_id'
     ];
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('spaceship_seats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('at_window');
-            $table->unsignedTinyInteger('row');
+            $table->string('name')->unique();
+            $table->boolean('at_window')->default(false);
+            $table->string('seat_name');
             $table->unsignedBigInteger('spaceship_id');
             $table->timestamps();
         });

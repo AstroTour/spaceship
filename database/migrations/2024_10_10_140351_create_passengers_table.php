@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('first_name', 100);
             $table->string('last_name', 100);
-            $table->unsignedBigInteger('reservation_id');
-            $table->date('birth_date');
+            $table->unsignedBigInteger('reservation_id')->index();
+            $table->unsignedBigInteger('spaceshipSeat_id')->index();
+            $table->text('secret_pass');
             $table->timestamps();
         });
     }

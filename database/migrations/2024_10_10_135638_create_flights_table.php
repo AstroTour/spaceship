@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->string('flight_number', 100);
-            $table->unsignedBigInteger('spaceship_id');
-            $table->unsignedTinyInteger('departure_spaceport_id');
-            $table->unsignedBigInteger('destination_spaceport_id');
-            $table->timestamp('departure_time');
+            $table->unsignedBigInteger('spaceship_id')->index();
+            $table->unsignedTinyInteger('departure_spaceport_id')->index();
+            $table->unsignedBigInteger('destination_spaceport_id')->index();
+            $table->timestamp('departure_time')->index();
             $table->timestamp('arrival_time');
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ class Passenger extends Model
         'first_name',
         'last_name',
         'reservation_id',
-        'birth_date'
+        'spaceshipSeat_id',
+        'secret_pass'
     ];
 }

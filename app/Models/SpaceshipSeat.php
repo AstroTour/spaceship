@@ -11,8 +11,8 @@ class SpaceshipSeat extends Model
 
     protected $fillable = [
         'name',
+        'seat_name',
         'at_window',
-        'row',
         'spaceship_id'
     ];
 }
