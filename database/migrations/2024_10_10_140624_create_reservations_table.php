@@ -13,8 +13,18 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('flight_id')->index();
-            $table->unsignedBigInteger('user_id')->index();
+
+
+            $table->foreignId('flight_id')
+                ->constrained('flights')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->unsignedSmallInteger('reserved_seats')->default(0);
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->boolean('at_window')->default(false);
             $table->string('seat_name');
-            $table->unsignedBigInteger('spaceship_id');
+            $table->foreignId('spaceship_id')->references('id')->on('spaceships');
             $table->timestamps();
         });
     }

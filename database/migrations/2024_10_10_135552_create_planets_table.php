@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use app\Models\Planet;
+use App\Models\Planet;
 
 return new class extends Migration
 {
@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('planets', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->unique();
-            $table->text('information');
+            $table->text('information')->nullable();
             $table->timestamps();
         });
 
@@ -64,7 +64,7 @@ return new class extends Migration
             'information' => 'A Plútó, amelyet egykor a Naprendszer kilencedik és legmesszebb eső bolygójának tartottak, ma a legnagyobb ismert törpebolygó a Naprendszerben.'
         ]);
 
-        
+
 
     }
 

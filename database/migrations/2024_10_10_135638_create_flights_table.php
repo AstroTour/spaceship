@@ -14,9 +14,21 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->string('flight_number', 100);
-            $table->unsignedBigInteger('spaceship_id')->index();
-            $table->unsignedTinyInteger('departure_spaceport_id')->index();
-            $table->unsignedBigInteger('destination_spaceport_id')->index();
+            $table->foreignId('spaceship_id')->references('id')->on('spaceships')->index();
+            $table->unsignedBigInteger('departure_spaceport_id');
+            $table->unsignedBigInteger('destination_spaceport_id');
+            $table->foreign('departure_spaceport_id', 'fk_departure_spaceport')
+                ->references('id')
+                ->on('spaceports')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+
+            $table->foreign('destination_spaceport_id', 'fk_destination_spaceport')
+                ->references('id')
+                ->on('spaceports')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamp('departure_time')->index();
             $table->timestamp('arrival_time');
             $table->timestamps();
