@@ -49,6 +49,56 @@
             </table>
         </div>
 
+        <h2 class="text-center">Menetrend</h2>
+        <div class="container-mt-4">
+            <form action="{{ route('flights.store') }}" method="POST" class="border p-4 rounded">
+                @csrf
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="departure_spaceport_id" class="form-label">Indul:</label>
+                        <select name="departure_spaceport_id" id="departure_spaceport_id" class="form-select" required>
+                            <option value="" selected disabled>Válassz űrkikötőt</option>
+                            @foreach($spaceports as $spaceport)
+                                <option value="{{ $spaceport->id }}">{{ $spaceport->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="destination_spaceport_id" class="form-label">Érkezik:</label>
+                        <select name="destination_spaceport_id" id="destination_spaceport_id" class="form-select" required>
+                            <option value="" selected disabled>Válassz űrkikötőt</option>
+                            @foreach($spaceports as $spaceport)
+                                <option value="{{ $spaceport->id }}">{{ $spaceport->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="departure_time" class="form-label">Vissza indul:</label>
+                        <input type="datetime-local" name="departure_time" id="departure_time" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="arrival_time" class="form-label">Vissza érkezik:</label>
+                        <input type="datetime-local" name="arrival_time" id="arrival_time" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="spaceship_id" class="form-label">Járat:</label>
+                    <select name="spaceship_id" id="spaceship_id" class="form-select" required>
+                        <option value="" selected disabled>Válassz űrhajót</option>
+                        @foreach($spaceships as $spaceship)
+                            <option value="{{ $spaceship->id }}">{{ $spaceship->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Létrehozás</button>
+            </form>
+        </div>
+
 
 </body>
 </html>
