@@ -11,10 +11,10 @@ class Flight extends Model
 
     protected $fillable = [
         'flight_number',
-        'spaceship_id',
+        'to_time',
+        'from_time',
         'departure_spaceport_id',
         'destination_spaceport_id',
-        'departure_time',
-        'arrival_time'
+        'spaceship_id'
     ];
 }

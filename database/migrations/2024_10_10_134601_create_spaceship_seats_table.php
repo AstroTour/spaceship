@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('spaceship_seats', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->boolean('at_window')->default(false);
+            $table->primary(['seat_name', 'spaceship_id']);
             $table->string('seat_name');
-            $table->foreignId('spaceship_id')->references('id')->on('spaceships');
+            $table->foreignId('spaceship_id')
+                ->constrained('spaceships')
+                ->onDelete('cascade');
+            $table->boolean('at_window');
             $table->timestamps();
         });
     }

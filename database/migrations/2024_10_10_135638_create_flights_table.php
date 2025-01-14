@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
-            $table->string('flight_number', 100);
-            $table->foreignId('spaceship_id')->references('id')->on('spaceships')->index();
+            $table->string('flight_number', 10);
+            $table->date('to_time')->nullable();
+            $table->date('from_time')->nullable();
             $table->unsignedBigInteger('departure_spaceport_id');
             $table->unsignedBigInteger('destination_spaceport_id');
             $table->foreign('departure_spaceport_id', 'fk_departure_spaceport')
@@ -22,15 +23,15 @@ return new class extends Migration
                 ->on('spaceports')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
-
             $table->foreign('destination_spaceport_id', 'fk_destination_spaceport')
                 ->references('id')
                 ->on('spaceports')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->timestamp('departure_time')->index();
-            $table->timestamp('arrival_time');
+            $table->foreign('spaceship_id')
+                ->references('id')
+                ->on('spaceships')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
