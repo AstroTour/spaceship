@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('from_time')->nullable();
             $table->unsignedBigInteger('departure_spaceport_id');
             $table->unsignedBigInteger('destination_spaceport_id');
+            $table->unsignedBigInteger('spaceship_id');
             $table->foreign('departure_spaceport_id', 'fk_departure_spaceport')
                 ->references('id')
                 ->on('spaceports')
