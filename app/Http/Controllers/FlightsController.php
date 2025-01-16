@@ -26,11 +26,12 @@ class FlightsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'departure_spaceport_id' => 'required|exists:spaceports,id',
-            'destination_spaceport_id' => 'required|exists:spaceports,id',
-            'spaceship_id' => 'required|exists:spaceships,id',
             'departure_time' => 'required|date',
             'arrival_time' => 'required|date|after:departure_time',
+            'goes_back' => 'required|date|after:arrival_time',
+            'comes_back' => 'required|date|after:goes_back',
+            'flights_id' => 'required|exists:flights,id',
+
         ]);
 
         Flight::create($validated);
