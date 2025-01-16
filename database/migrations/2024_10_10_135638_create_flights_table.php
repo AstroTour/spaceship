@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use \App\Models\Flight;
 
 return new class extends Migration
 {
@@ -14,8 +15,8 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->string('flight_number', 10);
-            $table->date('to_time')->nullable();
-            $table->date('from_time')->nullable();
+            $table->string('to_time')->nullable();
+            $table->string('from_time')->nullable();
             $table->unsignedBigInteger('departure_spaceport_id');
             $table->unsignedBigInteger('destination_spaceport_id');
             $table->unsignedBigInteger('spaceship_id');
@@ -35,6 +36,29 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
         });
+
+
+        Flight::create([
+            'flight_number' => 'AD154',
+            'to_time' => 'dgpwdngpkwdngwdpwngőwrng',
+            'from_time' => 'wdwpwjgőowgőw',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 4,
+            'spaceship_id' => 2,
+        ]);
+
+        Flight::create([
+            'flight_number' => 'AD191',
+            'to_time' => 'dgpwdngpkwdngwdpwngőwrngfekfe',
+            'from_time' => 'wdwpwjgőowgőwdkcmeő',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 7,
+            'spaceship_id' => 5,
+        ]);
+
+
+
+
     }
 
     /**
