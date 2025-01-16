@@ -10,7 +10,6 @@ class SpaceshipSeat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'seat_name',
         'at_window',
         'spaceship_id'

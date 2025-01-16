@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\FlightsController;
+use \App\Http\Controllers\ScheduleController;
+use \App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,4 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
+
+
+Route::get('/users', [AdminController::class, 'index']);
+Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+Route::post('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
+
+

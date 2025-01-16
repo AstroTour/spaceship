@@ -48,43 +48,49 @@
         </div>
 
         <div class="container mt-5">
-            <h2 class="text-center">Menetrend</h2>
-            <form action="{{ route('schedule.store') }}" method="POST" class="mt-4">
-                @csrf
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="departure_time" class="form-label">Indul:</label>
-                        <input type="datetime-local" name="departure_time" id="departure_time" class="form-control" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="arrival_time" class="form-label">Érkezik:</label>
-                        <input type="datetime-local" name="arrival_time" id="arrival_time" class="form-control" required>
-                    </div>
+        <h1 class="text-center mt-5">Menetrend Létrehozása</h1>
+        <form action="{{ route('schedules.store') }}" method="POST">
+            @csrf
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <label for="departure_time" class="form-label">Indul:</label>
+                    <input type="datetime-local" name="departure_time" id="departure_time" class="form-control" required>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label for="goes_back" class="form-label">Vissza indul:</label>
-                        <input type="datetime-local" name="goes_back" id="goes_back" class="form-control" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="comes_back" class="form-label">Vissza érkezik:</label>
-                        <input type="datetime-local" name="comes_back" id="comes_back" class="form-control" required>
-                    </div>
+                <div class="col-md-6">
+                    <label for="arrival_time" class="form-label">Érkezik:</label>
+                    <input type="datetime-local" name="arrival_time" id="arrival_time" class="form-control" required>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <label for="flight_id" class="form-label">Járat:</label>
-                        <select name="flight_id" id="flight_id" class="form-control" required>
-                            <option value="" selected disabled>Válassz egy járatot</option>
-                            @foreach($flights as $flight)
-                                <option value="{{ $flight->id }}">{{ $flight->flight_number }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="goes_back" class="form-label">Vissza indul:</label>
+                    <input type="datetime-local" name="goes_back" id="goes_back" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Létrehozás</button>
-            </form>
+                <div class="col-md-6">
+                    <label for="comes_back" class="form-label">Vissza érkezik:</label>
+                    <input type="datetime-local" name="comes_back" id="comes_back" class="form-control" required>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <label for="flights_id" class="form-label">Járat:</label>
+                    <select name="flights_id" id="flights_id" class="form-select" required>
+                        <option value="" disabled selected>Válassz egy járatot...</option>
+                        @foreach ($flights as $flight)
+                            <option value="{{ $flight->id }}">{{ $flight->flight_number }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <button type="submit" class="btn btn-primary">Létrehozás</button>
+            </div>
+        </form>
         </div>
+
+
+
+
 
 </body>
 </html>

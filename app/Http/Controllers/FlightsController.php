@@ -15,7 +15,8 @@ class FlightsController extends Controller
         return Flight::all();
     }
 
-    public function create() {
+    public function create()
+    {
         return view('welcome', [
             'spaceships' => Spaceship::all(),
             'spaceports' => Spaceport::all(),
@@ -25,17 +26,7 @@ class FlightsController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'departure_time' => 'required|date',
-            'arrival_time' => 'required|date|after:departure_time',
-            'goes_back' => 'required|date|after:arrival_time',
-            'comes_back' => 'required|date|after:goes_back',
-            'flights_id' => 'required|exists:flights,id',
 
-        ]);
-
-        Flight::create($validated);
-
-        return redirect()->route('flights.create')->with('success', 'Járat sikeresen létrehozva!');
     }
+
 }
