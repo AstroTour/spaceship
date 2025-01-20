@@ -10,7 +10,8 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-
+        $schedules = Schedule::with('flight')->get();
+        return view('schedules.index', compact('schedules'));
     }
 
     public function create()
@@ -41,5 +42,12 @@ class ScheduleController extends Controller
     public function edit($id)
     {
 
+    }
+
+    public function destroy($id)
+    {
+        $schedule = Schedule::findOrFail($id);
+        $schedule->delete();
+        return redirect()->back()->with('success', 'Menetrend sikeresen törölve.');
     }
 }

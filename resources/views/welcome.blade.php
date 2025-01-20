@@ -89,6 +89,53 @@
         </div>
 
 
+        <div class="mt-5">
+            <h2>Menetrendek Listája</h2>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <table class="table table-bordered table-striped mt-4">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Indulási idő</th>
+                    <th>Érkezési idő</th>
+                    <th>Visszaindulás</th>
+                    <th>Visszaérkezés</th>
+                    <th>Járat ID</th>
+                    <th>Művelet</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse ($schedules as $schedule)
+                    <tr>
+                        <td>{{ $schedule->id }}</td>
+                        <td>{{ $schedule->departure_time }}</td>
+                        <td>{{ $schedule->arrival_time }}</td>
+                        <td>{{ $schedule->goes_back }}</td>
+                        <td>{{ $schedule->comes_back }}</td>
+                        <td>{{ $schedule->flights_id }}</td>
+                        <td>
+                            <form action="{{ route('schedules.destroy', $schedule->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Biztosan törölni szeretnéd?')">Törlés</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Nincsenek menetrendek.</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+
+
+
 
 
 
