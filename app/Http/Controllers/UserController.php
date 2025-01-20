@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::all();
-
-
-
 
         // return response()->json($users);
         return view('welcome', compact('users'));
@@ -48,5 +47,23 @@ class UserController extends Controller
         $record->save();
     }
 
+    public function updatePassword(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            "password" => 'string|min:8|max:50'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(["message" => $validator->errors()->all()], 400);
+        }
+        $user = User::where("id", $id)->update([
+            "password" => Hash::make($request->password),
+        ]);
+        return response()->json(["user" => $user]);
+    }
+
+    public function destroy(string $id)
+    {
+        User::find($id)->delete();
+    }
 
 }
