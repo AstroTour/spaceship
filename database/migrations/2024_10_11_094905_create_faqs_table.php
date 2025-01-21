@@ -45,8 +45,13 @@ return new class extends Migration
         ]);
 
         Faq::create([
-            'question' => '',
-            'answer' => ''
+            'question' => 'Milyen időtartamúak az utazások?',
+            'answer' => 'Az utazás időtartama a választott bolygó távolságától függ. Az időtartamot a menetrendben feltüntetjük, és valós idejű frissítéseket is biztosítunk az esetleges változások esetén.'
+        ]);
+
+        Faq::create([
+            'question' => 'Hogyan készülhetek fel az eltérő gravitációra a bolygókon?',
+            'answer' => 'Az alkalmazás felkészítő leckéje tartalmaz információkat a különböző gravitációs viszonyokhoz való alkalmazkodásról, és a legfontosabb tudnivalókról. Emellett a fedélzeten speciális edzésprogramok is rendelkezésre állnak.'
         ]);
 
     }
