@@ -16,11 +16,15 @@ use \App\Http\Controllers\Api\ApiRegisterController;
 Route::post('/login', [ApiLoginController::class, 'login']);
 Route::post('/register', [ApiRegisterController::class, 'register']);
 
+/*Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/register', [RegisteredUserController::class, 'store']);*/
+
 Route::middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
+        /*Route::post('/logout', [ApiLoginController::class, 'logout']);*/
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
     });
 

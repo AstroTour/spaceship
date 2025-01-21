@@ -24,11 +24,8 @@ Route::middleware('auth')->group(function () {
 // require __DIR__.'/auth.php';
 
 
-<<<<<<< HEAD
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-=======
+
 Route::get('/admin', [AdminController::class, 'index']);
->>>>>>> 32f992ee9676e1139bf1e3fb72bb99ae5ac169e6
 Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
 Route::post('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
 Route::get('/schedules-list', [ScheduleController::class, 'index'])->name('schedules.index');
