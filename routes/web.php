@@ -29,6 +29,7 @@ Route::get('/csrf-token', function () {
 // require __DIR__.'/auth.php';
 
 
+
 Route::get('/admin', [AdminController::class, 'index']);
 Route::post('/users/{id}/update-role', [AdminController::class, 'updateRole'])->name('users.update-role');
 Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('users.delete-user');

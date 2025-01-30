@@ -16,7 +16,9 @@ class ApiLoginController extends Controller
         ]);
 
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Invalid login credentials'], 401);        }
+            return response()->json(['message' => 'Invalid login credentials'], 401);
+        }
+
         $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
@@ -25,6 +27,12 @@ class ApiLoginController extends Controller
             'user' => $user,
             'status' => 'Login successful',
         ]);
-
     }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logout successful']);
+    }
+
 }
