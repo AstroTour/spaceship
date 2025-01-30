@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -16,17 +17,10 @@ class UserController extends Controller
 
 
         // return response()->json($users);
-        return view('welcome', compact('users'));
+        return view('admin', compact('users'));
     }
 
-    public function updateRole(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->role = $request->input('role');
-        $user->save();
 
-        return redirect()->back()->with('success', 'Jogosultság sikeresen frissítve.');
-    }
 
     public function store(Request $request): void
     {
@@ -47,6 +41,15 @@ class UserController extends Controller
         $record->fill($request->all());
         $record->save();
     }
+
+    public function profileView(): ?\Illuminate\Contracts\Auth\Authenticatable
+    {
+        $user = Auth::user();
+
+        return $user;
+    }
+
+
 
 
 }

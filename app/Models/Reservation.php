@@ -13,4 +13,15 @@ class Reservation extends Model
         'user_id',
         'reserved_seats'
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
+    }
 }
