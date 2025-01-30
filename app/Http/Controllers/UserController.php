@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,18 +13,14 @@ class UserController extends Controller
     {
         $users = User::all();
 
+
+
+
         // return response()->json($users);
-        return view('welcome', compact('users'));
+        return view('admin', compact('users'));
     }
 
-    public function updateRole(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->role = $request->input('role');
-        $user->save();
 
-        return redirect()->back()->with('success', 'Jogosultság sikeresen frissítve.');
-    }
 
     public function store(Request $request): void
     {
@@ -47,23 +42,14 @@ class UserController extends Controller
         $record->save();
     }
 
-    public function updatePassword(Request $request, $id)
+    public function profileView(): ?\Illuminate\Contracts\Auth\Authenticatable
     {
-        $validator = Validator::make($request->all(), [
-            "password" => 'string|min:8|max:50'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(["message" => $validator->errors()->all()], 400);
-        }
-        $user = User::where("id", $id)->update([
-            "password" => Hash::make($request->password),
-        ]);
-        return response()->json(["user" => $user]);
+        $user = Auth::user();
+
+        return $user;
     }
 
-    public function destroy(string $id)
-    {
-        User::find($id)->delete();
-    }
+
+
 
 }

@@ -15,7 +15,20 @@ class AdminController extends Controller
         $users = User::all();
         $flights = Flight::all();
         $schedules = Schedule::all();
-        return view('welcome', compact('users', 'flights', 'schedules'));
+        return view('admin', compact('users', 'flights', 'schedules'));
     }
+
+    public function usersWithReservations()
+    {
+        $users = User::with([
+            'reservations.schedule.flight.spaceship',
+            'reservations.schedule.flight.departureSpaceport',
+            'reservations.schedule.flight.destinationSpaceport'
+        ])
+            ->get();
+        return $users;
+    }
+
+
 
 }

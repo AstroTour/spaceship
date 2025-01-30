@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ApiLoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ApiLoginController extends Controller
 {
-    public function login(Request $request)
+    public function login(ApiLoginRequest $request)
     {
-        $request->validate([
+        /*$request->validate([
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
-        ]);
+        ]);*/
 
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json(['message' => 'Invalid login credentials'], 401);
@@ -29,10 +30,6 @@ class ApiLoginController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
-    {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logout successful']);
-    }
+
 
 }

@@ -11,4 +11,5 @@ class FaqsController extends Controller
     {
         return Faq::all();
     }
+
 }

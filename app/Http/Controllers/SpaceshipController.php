@@ -11,4 +11,11 @@ class SpaceshipController extends Controller
     {
         return Spaceship::all();
     }
+
+    public function spaceshipsWithSeats()
+    {
+        $spaceships = Spaceship::with('seats')
+            ->get();
+        return $spaceships;
+    }
 }

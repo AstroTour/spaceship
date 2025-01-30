@@ -29,4 +29,11 @@ class FlightsController extends Controller
 
     }
 
+    public function flightsWithSchedules()
+    {
+        $flights = Flight::with('schedules')
+            ->get();
+        return $flights;
+    }
+
 }

@@ -6,6 +6,7 @@ use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\FlightsController;
 use \App\Http\Controllers\ScheduleController;
 use \App\Http\Controllers\AdminController;
+use \App\Http\Middleware\Admin;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,13 +23,13 @@ Route::middleware('auth')->group(function () {
 });
 
 // require __DIR__.'/auth.php';
-
-
-
-Route::get('/admin', [AdminController::class, 'index']);
-Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
-Route::post('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
-Route::get('/schedules-list', [ScheduleController::class, 'index'])->name('schedules.index');
-Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+Route::middleware(['auth:sanctum', Admin::class])
+    ->group(function () {
+        Route::get('/admin', [AdminController::class, 'index']);
+        Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+        Route::post('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
+        Route::get('/schedules-list', [ScheduleController::class, 'index'])->name('schedules.index');
+        Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+    });
 
 

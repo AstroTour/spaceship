@@ -24,4 +24,6 @@ class Schedule extends Model
         return $this->belongsTo(Flight::class, 'flights_id');
     }
 
+
+
 }

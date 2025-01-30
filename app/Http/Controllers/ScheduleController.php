@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Flight;
 
 class ScheduleController extends Controller
 {
@@ -22,7 +23,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'departure_time' => 'required|date',
+            'departure_time' => 'required|date|after_or_equal:today',
             'arrival_time' => 'required|date|after:departure_time',
             'goes_back' => 'required|date|after:arrival_time',
             'comes_back' => 'required|date|after:goes_back',
@@ -49,5 +50,43 @@ class ScheduleController extends Controller
         $schedule = Schedule::findOrFail($id);
         $schedule->delete();
         return redirect()->back()->with('success', 'Menetrend sikeresen törölve.');
+    }
+
+    public function publicSchedules(): \Illuminate\Database\Eloquent\Collection
+    {
+        $schedules = Schedule::with([
+            'flight.spaceship',
+            'flight.departureSpaceport',
+            'flight.destinationSpaceport'
+        ])
+            ->where('departure_time', '>', now())
+            ->orderBy('departure_time', 'asc')
+            ->get();
+
+        return $schedules;
+    }
+
+    public function schedulesDescending(): \Illuminate\Database\Eloquent\Collection
+    {
+
+        return Schedule::with([
+            'flight.spaceship',
+            'flight.departureSpaceport',
+            'flight.destinationSpaceport'
+        ])
+            ->orderBy('departure_time', 'desc')
+            ->get();
+    }
+
+    public function schedulesAscending(): \Illuminate\Database\Eloquent\Collection
+    {
+
+        return Schedule::with([
+            'flight.spaceship',
+            'flight.departureSpaceport',
+            'flight.destinationSpaceport'
+        ])
+            ->orderBy('departure_time', 'asc')
+            ->get();
     }
 }

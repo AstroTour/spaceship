@@ -14,4 +14,9 @@ class Spaceship extends Model
         'information',
         'capacity'
     ];
+
+    public function seats()
+    {
+        return $this->hasMany(SpaceshipSeat::class, 'spaceship_id');
+    }
 }
