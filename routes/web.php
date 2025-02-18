@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\FlightsController;
@@ -25,11 +26,18 @@ Route::middleware('auth')->group(function () {
 // require __DIR__.'/auth.php';
 Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
-        Route::get('/admin', [AdminController::class, 'index']);
-        Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
-        Route::post('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
-        Route::get('/schedules-list', [ScheduleController::class, 'index'])->name('schedules.index');
-        Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+
     });
 
+Route::get('/admin', [AdminController::class, 'index']);
+Route::delete('users/{id}', [AdminController::class, 'destroy'])->name('users.delete-user');
+Route::post('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.update-role');
+Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+Route::get('/schedules-list', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::delete('/schedules/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 
+
+Route::middleware(['auth:sanctum', SuperAdmin::class])
+    ->group(function () {
+
+    });

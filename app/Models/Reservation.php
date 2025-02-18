@@ -11,7 +11,8 @@ class Reservation extends Model
     protected $fillable = [
         'flight_id',
         'user_id',
-        'reserved_seats'
+        'reserved_seats',
+        'ticket_type'
     ];
 
 

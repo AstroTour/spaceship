@@ -13,6 +13,7 @@ use \App\Http\Controllers\Api\ApiLoginController;
 use \App\Http\Controllers\Api\ApiRegisterController;
 use \App\Http\Controllers\FaqsController;
 use \App\Http\Controllers\AdminController;
+use \App\Http\Controllers\ReservationsController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -43,3 +44,10 @@ Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
         Route::get('/admin', [AdminController::class, 'index']);
     });
+
+
+Route::get('/schedules-by-planet', [ReservationsController::class, 'schedulesForPlanet']);
+Route::get('/at-window-seat', [ReservationsController::class, 'checkWindowSeatAvailability']);
+Route::get('/ticket-type', [ReservationsController::class, 'validateTicketType']);
+Route::post('/user-insert', [ReservationsController::class, 'userDataInsert']);
+Route::get('/reservation', [ReservationsController::class, 'store']);

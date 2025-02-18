@@ -10,6 +10,6 @@ class ApiLoggedInController extends Controller
     public function logout(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logout successful']);
+        return response()->json(['message' => 'Sikeresen kijelentkezett!']);
     }
 }

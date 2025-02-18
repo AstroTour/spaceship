@@ -12,4 +12,9 @@ class Planet extends Model
         'name',
         'information'
     ];
+
+    public function spaceports()
+    {
+        return $this->hasMany(Spaceport::class, 'planet_id');
+    }
 }

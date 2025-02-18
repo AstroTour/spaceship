@@ -17,7 +17,7 @@ class ApiLoginController extends Controller
         ]);*/
 
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Invalid login credentials'], 401);
+            return response()->json(['message' => 'Helytelen hitelesítő adatok!'], 401);
         }
 
         $user = Auth::user();
@@ -26,7 +26,8 @@ class ApiLoginController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer',
             'user' => $user,
-            'status' => 'Login successful',
+            'message' => 'Bejelentkezés sikeres!',
+            'status' => 200,
         ]);
     }
 

@@ -25,6 +25,7 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->unsignedSmallInteger('reserved_seats')->default(0);
+            $table->string('ticket_type')->default('basic');
             $table->timestamps();
         });
     }
