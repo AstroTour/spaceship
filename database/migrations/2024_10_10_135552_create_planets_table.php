@@ -31,7 +31,7 @@ return new class extends Migration
 
         Planet::create([
            'name' => 'Föld',
-            'iformation' => 'Föld, otthonunk. Ez az egyetlen bolygó, amelyről ismert, hogy légköre szabad oxigént tartalmaz, folyékony víz óceánjai találhatók a felszínén, és természetesen élet is létezik rajta.'
+            'information' => 'Föld, otthonunk. Ez az egyetlen bolygó, amelyről ismert, hogy légköre szabad oxigént tartalmaz, folyékony víz óceánjai találhatók a felszínén, és természetesen élet is létezik rajta.'
         ]);
 
         Planet::create([
@@ -41,7 +41,7 @@ return new class extends Migration
 
         Planet::create([
            'name' => 'Jupiter',
-            'indormation' => 'A Jupiter a legnagyobb bolygó a Naprendszerben. Illően a római mitológia istenek királyáról nevezték el.'
+            'information' => 'A Jupiter a legnagyobb bolygó a Naprendszerben. Illően a római mitológia istenek királyáról nevezték el.'
         ]);
 
         Planet::create([

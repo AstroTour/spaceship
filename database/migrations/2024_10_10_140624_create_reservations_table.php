@@ -24,8 +24,9 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->unsignedSmallInteger('reserved_seats')->default(0);
+            $table->string('seat_name');
             $table->string('ticket_type')->default('basic');
+            $table->boolean('at_window');
             $table->timestamps();
         });
     }

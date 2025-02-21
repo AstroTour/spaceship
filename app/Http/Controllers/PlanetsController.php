@@ -9,6 +9,6 @@ class PlanetsController extends Controller
 {
     public function index()
     {
-        return Planet::all();
+        return response()->json(Planet::all());
     }
 }

@@ -24,7 +24,7 @@ class ReservationsController extends Controller
             ->join('flights', 'schedules.flights_id', '=', 'flights.id')
             ->join('spaceports', 'flights.destination_spaceport_id', '=', 'spaceports.id')
             ->where('spaceports.planet_id', $planetId)
-            ->where('schedules.mikor_indul', '>', $currentDateTime)
+            ->where('schedules.departure_time', '>', $currentDateTime)
             ->select('schedules.*')
             ->get();
 
@@ -82,7 +82,7 @@ class ReservationsController extends Controller
     protected function validateTicketType($ticketType)
     {
         if (!in_array($ticketType, ['Basic', 'VIP'])) {
-            abort(400, 'Érvénytelen jegy típus.');
+            abort(400, 'Érvénytelen jegy típus!');
         }
         return $ticketType;
     }
