@@ -19,6 +19,11 @@ class ScheduleController extends Controller
         return view('schedules', compact('schedules', 'flights'));
     }
 
+    public function list()
+    {
+        return response()->json(Schedule::all());
+    }
+
     public function create()
     {
 

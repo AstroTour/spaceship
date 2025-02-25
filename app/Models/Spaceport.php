@@ -13,4 +13,9 @@ class Spaceport extends Model
         'name',
         'planet_id'
     ];
+
+    public function planet()
+    {
+        return $this->belongsTo(Planet::class, 'planet_id');
+    }
 }

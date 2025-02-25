@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Planet extends Model
+class Prospectus extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'information'
+        'title',
+        'information',
+        'picture'
     ];
-
-    public function spaceports()
-    {
-        return $this->hasMany(Spaceport::class, 'planet_id');
-    }
 }

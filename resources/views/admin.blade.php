@@ -14,11 +14,6 @@
                 {{ session('success2') }}
             </div>
         @endif
-        <form method="GET" action="{{ route('admin.user.search') }}" class="mb-4 d-flex justify-content-center">
-            <input type="text" name="search" class="form-control w-25 me-2" placeholder="Keresés név/email/jogosultság alapján..." value="{{ request('search') }}">
-            <button type="submit" class="btn-save">Keresés</button>
-        </form>
-
         <table class="">
             <thead class="">
             <tr>
@@ -40,9 +35,9 @@
                             @csrf
                             <div class="input-group">
                                 <select name="role" class="role-select">
-                                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>user</option>
-                                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>admin</option>
-                                    <option value="super-admin" {{ $user->role === 'super-admin' ? 'selected' : '' }}>super-admin</option>
+                                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="super-admin" {{ $user->role === 'super-admin' ? 'selected' : '' }}>Super Admin</option>
                                 </select>
                                 <button type="submit" class="btn-save">Mentés</button>
                             </div>
@@ -63,7 +58,6 @@
             @endforelse
 
             </tbody>
-
         </table>
     </div>
 @endsection

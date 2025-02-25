@@ -46,13 +46,13 @@ return new class extends Migration
         ]);
 
         Spaceport::create([
-            'name' => 'Ringhaven',
+            'name' => 'Ring Haven',
             'planet_id' => 6
         ]);
 
 
         Spaceport::create([
-            'name' => 'Ringgate',
+            'name' => 'Ring Gate',
             'planet_id' => 7
         ]);
 
