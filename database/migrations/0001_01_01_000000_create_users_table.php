@@ -48,7 +48,7 @@ return new class extends Migration
         User::create([
             'username' => 'Lukács Alexandra',
             'email' => 'szendy@gmail.com',
-            'password' => 'AzSQljo',
+            'password' => 'AzSQljoo',
             'role' => 'admin'
         ]);
 
@@ -64,6 +64,13 @@ return new class extends Migration
             'email' => 'totya@gmail.com',
             'password' => 'totya123',
             'role' => 'user'
+        ]);
+
+        User::create([
+            'username' => 'TestSAdmin',
+            'email' => 'testsadmin@gmail.com',
+            'password' => 'testsadmin',
+            'role' => 'super-admin'
         ]);
 
     }

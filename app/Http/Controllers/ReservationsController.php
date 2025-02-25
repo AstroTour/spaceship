@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class ReservationsController extends Controller
 {
-    public function index()
+    /*public function index()
     {
-        return Reservation::all();
-    }
+        $reservations = Reservation::with(['user', 'flight.schedule'])
+            ->get();
+
+        return view('reservations', compact('reservations'));
+    }*/
 }

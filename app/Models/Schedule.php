@@ -19,6 +19,9 @@ class Schedule extends Model
         'condition'
     ];
 
+    protected array $dates = ['comes_back'];
+
+
     public function flight()
     {
         return $this->belongsTo(Flight::class, 'flights_id');

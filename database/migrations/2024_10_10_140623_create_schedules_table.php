@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->timestamp('departure_time');
-            $table->timestamp('arrival_time');
-            $table->timestamp('goes_back');
-            $table->timestamp('comes_back');
+            $table->datetime('departure_time');
+            $table->datetime('arrival_time');
+            $table->datetime('goes_back');
+            $table->datetime('comes_back');
             $table->foreignId('flights_id')
                 ->references('id')
                 ->on('flights');

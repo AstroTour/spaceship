@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('spaceships', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->string('name', 100)->unique();
             $table->text('information');
             $table->unsignedSmallInteger('capacity');
             $table->timestamps();

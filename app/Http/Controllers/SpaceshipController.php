@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 
 class SpaceshipController extends Controller
 {
+
     public function index()
     {
-        return Spaceship::all();
+        $spaceships = Spaceship::all();
+
+        return view('spaceships', compact('spaceships'));
     }
+
+
+
 
     public function spaceshipsWithSeats()
     {

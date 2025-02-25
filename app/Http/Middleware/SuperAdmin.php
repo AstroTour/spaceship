@@ -12,13 +12,16 @@ class SuperAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !(Auth::user()->role === 'super-admin')) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        if (!Auth::check() || Auth::user()->role !== 'super-admin') {
+            abort(403, 'Nincs jogosultságod a hozzáféréshez.');
         }
+
         return $next($request);
     }
 }

@@ -24,4 +24,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Schedule::class);
     }
+
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class);
+    }
 }

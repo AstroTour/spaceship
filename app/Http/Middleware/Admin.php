@@ -12,13 +12,16 @@ class Admin
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Request $request
+     * @param Closure $next
+     * @return Response
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !(Auth::user()->role === 'admin')) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        if (Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'super-admin')) {
+            return $next($request);
         }
-        return $next($request);
+
+        abort(403, 'Nincs jogosultságod a hozzáféréshez.');
     }
 }
