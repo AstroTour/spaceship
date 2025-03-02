@@ -46,8 +46,10 @@ class FlightsController extends Controller
             ->select(
                 'f.flight_number',
                 's.departure_time',
+                'f.to_time',
                 's.arrival_time',
                 's.goes_back',
+                'f.from_time', 
                 's.comes_back',
                 'sp.name as port',
                 'p.name as planet',

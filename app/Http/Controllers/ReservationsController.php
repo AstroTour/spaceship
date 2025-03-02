@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Auth;
 use App\Models\SpaceshipSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -61,7 +62,7 @@ class ReservationsController extends Controller
         return redirect()->back()->with('success', 'Sikeres foglalás!');
     }
 
-    protected function checkWindowSeatAvailability($scheduleId)
+    public function checkWindowSeatAvailability($scheduleId)
     {
         $schedule = Schedule::findOrFail($scheduleId);
 
@@ -79,7 +80,7 @@ class ReservationsController extends Controller
         return ($reservedWindowSeats < $availableWindowSeats);
     }
 
-    protected function validateTicketType($ticketType)
+    public function validateTicketType($ticketType)
     {
         if (!in_array($ticketType, ['Basic', 'VIP'])) {
             abort(400, 'Érvénytelen jegy típus!');
@@ -87,12 +88,17 @@ class ReservationsController extends Controller
         return $ticketType;
     }
 
-    protected function userDataInsert()
+    public function userDataInsert()
     {
-        $user = auth()->user();
-        return [
-            'name'  => $user->username,
-            'email' => $user->email,
-        ];
+        $user = Auth::user();
+        
+        if (!$user) {
+            return response()->json(['error' => 'Not authenticated'], 401);
+        }
+
+        return response()->json([
+            'username' => $user->username,
+            'email'    => $user->email,
+        ]);
     }
 }

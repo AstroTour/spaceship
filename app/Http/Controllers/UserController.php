@@ -37,9 +37,31 @@ class UserController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $record = User::find($id);
+        $validated = $request->validate([
+            'username' => 'sometimes|required|string|max:255',
+            'email'    => 'sometimes|required|email|max:255',
+            'password' => 'nullable|string|min:8',
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->has('username')) {
+            $user->username = $validated['username'];
+        }
+        if ($request->has('email')) {
+            $user->email = $validated['email'];
+        }
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return response()->json(['message' => 'Profil módosítva!']);
+        
+        /*$record = User::find($id);
         $record->fill($request->all());
-        $record->save();
+        $record->save();*/
     }
 
     public function profileView(): ?\Illuminate\Contracts\Auth\Authenticatable
@@ -48,8 +70,5 @@ class UserController extends Controller
 
         return $user;
     }
-
-
-
 
 }

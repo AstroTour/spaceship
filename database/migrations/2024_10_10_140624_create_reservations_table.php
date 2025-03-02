@@ -26,7 +26,6 @@ return new class extends Migration
 
             $table->string('seat_name');
             $table->string('ticket_type')->default('basic');
-            $table->boolean('at_window');
             $table->timestamps();
         });
     }
