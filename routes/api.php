@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 
@@ -65,3 +66,5 @@ Route::middleware(['auth:sanctum', Admin::class])
 
 
 
+=======
+>>>>>>> b876fc97df91a4aef2d89c480b938bcd4292008d

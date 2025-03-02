@@ -22,6 +22,6 @@ class Admin
             return $next($request);
         }
 
-        abort(403, 'Nincs jogosultságod a hozzáféréshez!');
+        abort(403, 'Nincs jogosultságod a hozzáféréshez.');
     }
 }

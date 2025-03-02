@@ -66,6 +66,13 @@ return new class extends Migration
             'role' => 'user'
         ]);
 
+        User::create([
+            'username' => 'TestSAdmin',
+            'email' => 'testsadmin@gmail.com',
+            'password' => 'testsadmin',
+            'role' => 'super-admin'
+        ]);
+
     }
 
     /**

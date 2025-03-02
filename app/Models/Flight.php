@@ -44,4 +44,9 @@ class Flight extends Model
     {
         return $this->hasMany(Schedule::class, 'flights_id');
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

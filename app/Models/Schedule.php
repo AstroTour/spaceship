@@ -19,7 +19,7 @@ class Schedule extends Model
         'condition'
     ];
 
-    protected array $dates = ['comes_back']; // Nem kötelező, de segíthet
+    protected array $dates = ['comes_back'];
 
 
     public function flight()

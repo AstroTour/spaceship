@@ -13,12 +13,33 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+
+    public function create()
+    {
+        return view('admin');
+    }
+
+
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-        $request->session()->regenerate();
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Invalid login credentials'], 401);
+        }
 
+        /*$user = Auth::user();
+        $token = $user->createToken('auth_token')->plainTextToken; */
+
+        /* return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user,
+            'status' => 'Login successful',
+        ]); */
         return response()->noContent();
 
     }

@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Flight;
+use Illuminate\Support\Facades\Log;
 
 class ScheduleController extends Controller
 {
     public function index()
     {
         $schedules = Schedule::with('flight')->get();
-        return view('schedules.index', compact('schedules'));
+        $flights = Flight::all();
+
+        return view('schedules', compact('schedules', 'flights'));
     }
 
     public function list()
@@ -94,4 +98,6 @@ class ScheduleController extends Controller
             ->orderBy('departure_time', 'asc')
             ->get();
     }
+
+
 }
