@@ -27,9 +27,9 @@ class ApiRegisterController extends Controller
             'password' => Hash::make($request->string('password')),
         ]);
 
-        /*event(new Registered($user));
+        event(new Registered($user));
 
-        Auth::login($user);*/
+        Auth::login($user);
 
         return response()->json(['message'=>'Sikeres regisztráció!', 'data'=>$user], 201);
     }

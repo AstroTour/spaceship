@@ -6,17 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::all();
-
-
-
-
-        // return response()->json($users);
+        //return response()->json($users);
         return view('admin', compact('users'));
     }
 
@@ -30,16 +27,16 @@ class UserController extends Controller
     }
 
 
-    public function show(string $id): null
+    public function show(string $id)
     {
         return User::find($id);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         $validated = $request->validate([
             'username' => 'sometimes|required|string|max:255',
-            'email'    => 'sometimes|required|email|max:255',
+            'email' => 'sometimes|required|email|max:255|unique:users,email,' . Auth::id(),
             'password' => 'nullable|string|min:8',
         ]);
 

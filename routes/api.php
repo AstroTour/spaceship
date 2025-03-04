@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 <?php
-
 
 use App\Http\Controllers\Api\ApiLoggedInController;
 use App\Http\Controllers\FlightsController;
@@ -30,6 +28,7 @@ Route::get('/planet', [PlanetsController::class, 'index']);
 Route::get('/prospectus', [ProspectusController::class, 'index']);
 Route::get('/schedule', [FlightsController::class, 'flightsAndSchedules']);
 Route::get('/spaceship', [SpaceshipController::class, 'index']);
+Route::patch('/profile-update', [UserController::class, 'update']);
 
 
 Route::get('/public-schedules', [ScheduleController::class, 'publicSchedules']);
@@ -39,11 +38,9 @@ Route::get('/schedules/ascending', [ScheduleController::class, 'schedulesAscendi
 
 Route::get('/profile', [UserController::class, 'profileView']);
 Route::post('/logout', [ApiLoggedInController::class, 'logout']);
-Route::patch('/profile-update', [UserController::class, 'update']);
 Route::get('/schedules-for-planet', [ReservationsController::class, 'schedulesForPlanet']);
 Route::get('/at-window-seat', [ReservationsController::class, 'checkWindowSeatAvailability']);
 Route::get('/ticket-type', [ReservationsController::class, 'validateTicketType']);
-Route::get('/user-insert', [ReservationsController::class, 'userDataInsert']);
 Route::get('/reservation', [ReservationsController::class, 'store']);
 
 
@@ -63,8 +60,3 @@ Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
         Route::get('/admin', [AdminController::class, 'index']);
     });
-
-
-
-=======
->>>>>>> b876fc97df91a4aef2d89c480b938bcd4292008d
