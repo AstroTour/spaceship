@@ -39,9 +39,9 @@ class ReservationsController extends Controller
             'schedule_id'     => 'required|exists:schedules,id',
             'ticket_type'     => 'required|in:Basic,VIP',
             'at_window'       => 'required|boolean',
-            'reserved_seats'  => 'required|string',
+            'seat'            => 'nullable|boolean',
         ]);
-
+        
         if ($validatedData['at_window'] == 1) {
             if (!$this->checkWindowSeatAvailability($validatedData['schedule_id'])) {
                 return redirect()->back()->withErrors([
@@ -49,16 +49,18 @@ class ReservationsController extends Controller
                 ])->withInput();
             }
         }
-
+        
         $ticketType = $this->validateTicketType($validatedData['ticket_type']);
-
+        
+        $seatValue = $validatedData['at_window']; // Ha at_window = 1, akkor seat is 1 lesz
+ 
         $reservation = Reservation::create([
-            'reserved_seats' => $validatedData['reserved_seats'],
+            'seat'          => $seatValue,
             'schedule'      => $validatedData['schedule_id'],
             'user'          => auth()->user()->id,
             'ticket_type'   => $ticketType
         ]);
-
+        
         return redirect()->back()->with('success', 'Sikeres foglalás!');
     }
 

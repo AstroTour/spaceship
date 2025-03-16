@@ -41,19 +41,11 @@ Route::post('/logout', [ApiLoggedInController::class, 'logout']);
 Route::get('/schedules-for-planet', [ReservationsController::class, 'schedulesForPlanet']);
 Route::get('/at-window-seat', [ReservationsController::class, 'checkWindowSeatAvailability']);
 Route::get('/ticket-type', [ReservationsController::class, 'validateTicketType']);
-Route::get('/reservation', [ReservationsController::class, 'store']);
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::patch('/update/{id}', [UserController::class, 'update']);
-//    Route::get('/profile', [UserController::class, 'profileView']);
-//    Route::post('/logout', [ApiLoggedInController::class, 'logout']);
-//    Route::post('/profile-update', [UserController::class, 'update']);
-//    Route::get('/schedules-by-planet', [ReservationsController::class, 'schedulesForPlanet']);
-//    Route::get('/at-window-seat', [ReservationsController::class, 'checkWindowSeatAvailability']);
-//    Route::get('/ticket-type', [ReservationsController::class, 'validateTicketType']);
-//    Route::post('/user-insert', [ReservationsController::class, 'userDataInsert']);
-//    Route::get('/reservation', [ReservationsController::class, 'store']);
+    Route::post('/update/{id}', [UserController::class, 'update']);
+    Route::get('/reservation', [ReservationsController::class, 'store']);
 });
 
 
