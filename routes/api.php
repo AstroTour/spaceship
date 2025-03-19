@@ -19,7 +19,6 @@ use \App\Http\Controllers\ReservationsController;
 
 Route::middleware('auth:sanctum')->get('/client', function (Request $request) {
     return response()->json(['user' => $request->user()]);
-    Route::post('/reservation', [ReservationsController::class, 'store']);
 });
 
 Route::post('/auth/login', [ApiLoginController::class, 'login']);
