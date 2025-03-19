@@ -34,60 +34,52 @@ class ReservationsController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'planet_id'       => 'required|exists:planets,id',
-            'schedule_id'     => 'required|exists:schedules,id',
-            'ticket_type'     => 'required|in:Basic,VIP',
-            'at_window'       => 'required|boolean',
-            'seat'            => 'nullable|boolean',
-        ]);
+        if (!auth()->check()) {
+            return response()->json(['message' => 'Felhasználó nincs bejelentkezve!'], 401);
+        }
+    
+        // Felhasználói ID kinyerése az autentikációból
+        $userId = auth()->id();
         
-        if ($validatedData['at_window'] == 1) {
-            if (!$this->checkWindowSeatAvailability($validatedData['schedule_id'])) {
-                return redirect()->back()->withErrors([
-                    'at_window' => 'Nincs több ablak melletti szabad hely!'
-                ])->withInput();
+        $validatedData = $request->validate([
+            'schedule_id' => 'required|exists:schedules,id',
+            'ticket_type' => 'required|in:Basic,VIP',
+            'seat'        => 'required|boolean', // true = ablak melletti, false = folyosó melletti
+        ]);
+    
+        // Ha ablak melletti helyet kér (seat = true), ellenőrizni kell a foglaltságot
+        if ($validatedData['seat']) {
+            $schedule = Schedule::findOrFail($validatedData['schedule_id']);
+            $flight = $schedule->flight;
+            $spaceship = $flight->spaceship;
+    
+            $availableWindowSeats = SpaceshipSeat::where('spaceship_id', $spaceship->id)
+                ->where('at_window', 1)
+                ->count();
+    
+            $reservedWindowSeats = Reservation::where('schedule_id', $validatedData['schedule_id'])
+                ->where('seat', 1) // 1 = ablak melletti
+                ->count();
+    
+            if ($reservedWindowSeats >= $availableWindowSeats) {
+                return response()->json([
+                    'message' => 'Nincs több ablak melletti szabad hely!',
+                ], 400);
             }
         }
-        
-        $ticketType = $this->validateTicketType($validatedData['ticket_type']);
-        
-        $seatValue = $validatedData['at_window']; // Ha at_window = 1, akkor seat is 1 lesz
- 
+    
+        // Új foglalás mentése
         $reservation = Reservation::create([
-            'seat'          => $seatValue,
-            'schedule'      => $validatedData['schedule_id'],
-            'user'          => auth()->user()->id,
-            'ticket_type'   => $ticketType
+            'schedule_id' => $validatedData['schedule_id'],
+            'user_id'     => auth()->id(),
+            'seat'        => $validatedData['seat'], // Boolean érték közvetlenül mentve
+            'ticket_type' => $validatedData['ticket_type']
         ]);
         
-        return redirect()->back()->with('success', 'Sikeres foglalás!');
-    }
-
-    public function checkWindowSeatAvailability($scheduleId)
-    {
-        $schedule = Schedule::findOrFail($scheduleId);
-
-        $flight = $schedule->flight;
-        $spaceship = $flight->spaceship;
-
-        $availableWindowSeats = SpaceshipSeat::where('spaceship_id', $spaceship->id)
-            ->where('at_window', 1)
-            ->count();
-
-        $reservedWindowSeats = Reservation::where('schedule', $schedule->id)
-            ->where('at_window', 1)
-            ->count();
-
-        return ($reservedWindowSeats < $availableWindowSeats);
-    }
-
-    public function validateTicketType($ticketType)
-    {
-        if (!in_array($ticketType, ['Basic', 'VIP'])) {
-            abort(400, 'Érvénytelen jegy típus!');
-        }
-        return $ticketType;
+        return response()->json([
+            'message' => 'Sikeres foglalás! 🚀',
+            'reservation' => $reservation
+        ], 201);
     }
 
     public function userDataInsert(){
