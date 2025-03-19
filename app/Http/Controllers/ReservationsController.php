@@ -90,17 +90,18 @@ class ReservationsController extends Controller
         return $ticketType;
     }
 
-    public function userDataInsert()
-    {
-        $user = Auth::user();
+    public function userDataInsert(){
         
-        if (!$user) {
-            return response()->json(['error' => 'Not authenticated'], 401);
-        }
-
-        return response()->json([
-            'username' => $user->username,
-            'email'    => $user->email,
-        ]);
+    $user = Auth::user();
+    
+    if (!$user) {
+        return response()->json(['error' => 'Not authenticated'], 401);
     }
+
+    return response()->json([
+        'username' => $user->username,
+        'email'    => $user->email,
+    ]);
+    }
+
 }

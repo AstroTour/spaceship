@@ -44,7 +44,8 @@ Route::get('/ticket-type', [ReservationsController::class, 'validateTicketType']
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/update/{id}', [UserController::class, 'update']);
+    Route::post('/update', [UserController::class, 'update']);
+    Route::get('/datainsert', [UserController::class, 'userDataInsert']);
     Route::get('/reservation', [ReservationsController::class, 'store']);
 });
 
