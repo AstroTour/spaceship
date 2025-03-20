@@ -24,7 +24,7 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->string('seat_name');
+            $table->boolean('seat')->default(false); // true -> ablak melletti, false -> nem ablak melletti
             $table->string('ticket_type')->default('basic');
             $table->timestamps();
         });

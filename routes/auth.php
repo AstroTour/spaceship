@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
@@ -16,9 +15,9 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 
 
 
-/*Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
-    ->name('login');*/
+    ->name('login');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest')
@@ -44,6 +43,10 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
     ->middleware(['auth', 'throttle:6,1'])
     ->name('verification.send');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
+    Route::get('/user', function (Request $request) {
+        return response()->json([
+            'user' => $request->user(),
+            'status' => 200
+        ]);
+    })->name('user.me');
+});

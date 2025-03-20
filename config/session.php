@@ -19,7 +19,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    'driver' => env('SESSION_DRIVER', 'cookie'),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,8 +169,8 @@ return [
     | the cookie from being sent to you when it can't be done securely.
     |
     */
-
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    
+    'secure' => env('SESSION_SECURE_COOKIE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -200,7 +200,7 @@ return [
     |
     */
 
-    'same_site' => env('SESSION_SAME_SITE', 'lax'),
+    'same_site' => 'none',
 
     /*
     |--------------------------------------------------------------------------
