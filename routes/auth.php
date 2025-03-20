@@ -49,4 +49,4 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
             'status' => 200
         ]);
     })->name('user.me');
-});
+
