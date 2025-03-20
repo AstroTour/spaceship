@@ -72,7 +72,7 @@ class ReservationsController extends Controller
         $reservation = Reservation::create([
             'schedule_id' => $validatedData['schedule_id'],
             'user_id'     => auth()->id(),
-            'seat'        => $validatedData['seat'], // Boolean érték közvetlenül mentve
+            'seat'        => $validatedData['seat'],
             'ticket_type' => $validatedData['ticket_type']
         ]);
         
