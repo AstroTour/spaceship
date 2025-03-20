@@ -12,22 +12,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::unprepared("CREATE TRIGGER update_schedule_condition
-            BEFORE UPDATE ON schedules
+        DB::unprepared('
+            CREATE TRIGGER `update_schedule_condition`
+            BEFORE UPDATE ON `schedules`
             FOR EACH ROW
             BEGIN
-
-                    UPDATE schedules SET schedules.condition = 'utazik'
-                    WHERE schedules.departure_time <= NOW() AND schedules.condition = 'várakozik';
-
-            END;");
+                IF NEW.`departure_time` <= NOW() THEN
+                    SET NEW.`condition` = "utazik";
+                END IF;
+            END
+        ');
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        DB::unprepared("DROP TRIGGER IF EXISTS update_schedule_condition");
+        DB::unprepared('DROP TRIGGER IF EXISTS update_schedule_condition;');
     }
 };

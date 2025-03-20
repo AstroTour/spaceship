@@ -53,6 +53,13 @@ return new class extends Migration
         ]);
 
         User::create([
+            'username' => 'testuser',
+            'email' => 'testuser@gmail.com',
+            'password' => 'testuser123',
+            'role' => 'user'
+        ]);
+
+        User::create([
             'username' => 'Pfiffer Attila',
             'email' => 'asd@gmail.com',
             'password' => 'asd12345',

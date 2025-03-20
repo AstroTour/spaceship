@@ -85,7 +85,7 @@ class AdminController extends Controller
 
         Schedule::create($validated);
 
-        return redirect()->back()->with('success', 'Menetrend sikeresen létrehozva.');
+        return redirect()->back()->with('success', 'Járat sikeresen létrehozva.');
 
     }
 
@@ -133,6 +133,19 @@ class AdminController extends Controller
         $spaceships = Spaceship::all();
 
         return view('spaceships', compact('spaceships'));
+    }
+
+    public function adminSpaceshipsCreate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:100|unique:spaceships,name',
+            'information' => 'required|string',
+            'capacity' => 'required|integer|min:1|max:15', // unsignedSmallInteger határa
+        ]);
+
+        Spaceship::create($validatedData);
+
+        return redirect()->back()->with('success5', 'Űrhajó sikeresen létrehozva.');
     }
 
 

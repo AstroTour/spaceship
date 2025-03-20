@@ -14,6 +14,13 @@
                 {{ session('success2') }}
             </div>
         @endif
+
+        <form action="{{ route('admin.user.search') }}" method="GET" class = "mb-3">
+            <div class="input-group" style = "max-width: 400px;">
+                <input type="text" name="search" class="form-control" placeholder="Név/Email/Jogosultság alapján" value="{{ request('search') }}">
+                <button type="submit" class="btn-save btn-primary">Keresés</button>
+            </div>
+        </form>
         <table class="">
             <thead class="">
             <tr>

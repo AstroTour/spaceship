@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('condition')->default('várakozik');
             $table->timestamps();
         });
+
+        
     }
 
     /**
