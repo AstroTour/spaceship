@@ -1,5 +1,5 @@
 <?php
-
+ 
 use App\Http\Controllers\Api\ApiLoggedInController;
 use App\Http\Controllers\FlightsController;
 use App\Http\Controllers\PlanetsController;
@@ -15,41 +15,40 @@ use \App\Http\Controllers\Api\ApiLoginController;
 use \App\Http\Controllers\Api\ApiRegisterController;
 use \App\Http\Controllers\FaqsController;
 use \App\Http\Controllers\AdminController;
+use App\Http\Controllers\GalleryController;
 use \App\Http\Controllers\ReservationsController;
-
+ 
 Route::middleware('auth:sanctum')->get('/client', function (Request $request) {
     return response()->json(['user' => $request->user()]);
 });
-
-Route::post('/auth/login', [ApiLoginController::class, 'login']);
-Route::post('/register', [ApiRegisterController::class, 'register']);
+ 
+Route::get('/gallery', [GalleryController::class, 'index']);
 Route::get('/faq', [FaqsController::class, 'index']);
 Route::get('/planet', [PlanetsController::class, 'index']);
 Route::get('/prospectus', [ProspectusController::class, 'index']);
 Route::get('/schedule', [FlightsController::class, 'flightsAndSchedules']);
 Route::get('/spaceship', [SpaceshipController::class, 'index']);
-
-
-
+ 
+ 
 Route::get('/public-schedules', [ScheduleController::class, 'publicSchedules']);
 Route::get('/schedules/descending', [ScheduleController::class, 'schedulesDescending']);
 Route::get('/schedules/ascending', [ScheduleController::class, 'schedulesAscending']);
-
-
+ 
+ 
 Route::get('/profile', [UserController::class, 'profileView']);
 Route::post('/logout', [ApiLoggedInController::class, 'logout']);
 Route::get('/schedules-for-planet', [ReservationsController::class, 'schedulesForPlanet']);
 Route::get('/at-window-seat', [ReservationsController::class, 'checkWindowSeatAvailability']);
 Route::get('/ticket-type', [ReservationsController::class, 'validateTicketType']);
-
-
+ 
+ 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/update', [UserController::class, 'update']);
     Route::get('/datainsert', [UserController::class, 'userDataInsert']);
-    Route::post('/reservation', [ReservationsController::class, 'store']);
+    Route::get('/reservation', [ReservationsController::class, 'store']);
 });
-
-
+ 
+ 
 Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
         Route::get('/admin', [AdminController::class, 'index']);

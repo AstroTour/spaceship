@@ -1,10 +1,9 @@
-
 <?php
-
+ 
 use Illuminate\Support\Str;
-
+ 
 return [
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
@@ -18,9 +17,9 @@ return [
     |            "memcached", "redis", "dynamodb", "array"
     |
     */
-
+ 
     'driver' => env('SESSION_DRIVER', 'cookie'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Lifetime
@@ -32,11 +31,11 @@ return [
     | indicate that via the expire_on_close configuration option.
     |
     */
-
+ 
     'lifetime' => env('SESSION_LIFETIME', 120),
-
+ 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Encryption
@@ -47,9 +46,9 @@ return [
     | automatically by Laravel and you may use the session like normal.
     |
     */
-
+ 
     'encrypt' => env('SESSION_ENCRYPT', false),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session File Location
@@ -60,9 +59,9 @@ return [
     | are free to provide another location where they should be stored.
     |
     */
-
+ 
     'files' => storage_path('framework/sessions'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Database Connection
@@ -73,9 +72,9 @@ return [
     | correspond to a connection in your database configuration options.
     |
     */
-
+ 
     'connection' => env('SESSION_CONNECTION'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Database Table
@@ -86,9 +85,9 @@ return [
     | for you; however, you're welcome to change this to another table.
     |
     */
-
+ 
     'table' => env('SESSION_TABLE', 'sessions'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Cache Store
@@ -101,9 +100,9 @@ return [
     | Affects: "apc", "dynamodb", "memcached", "redis"
     |
     */
-
+ 
     'store' => env('SESSION_STORE'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Sweeping Lottery
@@ -114,9 +113,9 @@ return [
     | happen on a given request. By default, the odds are 2 out of 100.
     |
     */
-
+ 
     'lottery' => [2, 100],
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Name
@@ -127,12 +126,12 @@ return [
     | since doing so does not grant a meaningful security improvement.
     |
     */
-
+ 
     'cookie' => env(
         'SESSION_COOKIE',
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
     ),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Path
@@ -143,9 +142,9 @@ return [
     | your application, but you're free to change this when necessary.
     |
     */
-
+ 
     'path' => env('SESSION_PATH', '/'),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Domain
@@ -156,9 +155,9 @@ return [
     | domain and all subdomains. Typically, this shouldn't be changed.
     |
     */
-
+ 
     'domain' => env('SESSION_DOMAIN',"http://defront.monvoie.com"),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | HTTPS Only Cookies
@@ -169,9 +168,8 @@ return [
     | the cookie from being sent to you when it can't be done securely.
     |
     */
-    
     'secure' => env('SESSION_SECURE_COOKIE', false),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | HTTP Access Only
@@ -182,9 +180,9 @@ return [
     | the HTTP protocol. It's unlikely you should disable this option.
     |
     */
-
+ 
     'http_only' => env('SESSION_HTTP_ONLY', true),
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Same-Site Cookies
@@ -199,9 +197,9 @@ return [
     | Supported: "lax", "strict", "none", null
     |
     */
-
+ 
     'same_site' => 'none',
-
+ 
     /*
     |--------------------------------------------------------------------------
     | Partitioned Cookies
@@ -212,7 +210,7 @@ return [
     | when flagged "secure" and the Same-Site attribute is set to "none".
     |
     */
-
+ 
     'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),
-
+ 
 ];
