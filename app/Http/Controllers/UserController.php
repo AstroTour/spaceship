@@ -69,17 +69,17 @@ class UserController extends Controller
     }
 
     public function userDataInsert()
-    {
-    $user = Auth::user();
-    
-    if (!$user) {
-        return response()->json(['error' => 'Not authenticated'], 401);
-    }
+        {
+        $user = Auth::user();
+        
+        if (!$user) {
+            return response()->json(['error' => 'Not authenticated'], 401);
+        }
 
-    return response()->json([
-        'username' => $user->username,
-        'email'    => $user->email,
-    ]);
+        return response()->json([
+            'username' => $user->username,
+            'email'    => $user->email,
+        ]);
     }
 
 }

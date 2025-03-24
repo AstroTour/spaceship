@@ -43,11 +43,4 @@ class ApiLoginController extends Controller
         ], 200);
     }
 
-    public function me(Request $request)
-    {
-        return response()->json([
-            'user' => $request->user(),
-            'status' => 200,
-        ], 200);
-    }
 }
