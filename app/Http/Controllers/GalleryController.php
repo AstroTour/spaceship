@@ -9,6 +9,12 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        return Gallery::all();
+        $images = Gallery::all()->map(function ($image) {
+            return [
+                'url' => url($image->img),
+            ];
+        });
+
+        return response()->json($images);
     }
 }
