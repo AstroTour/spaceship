@@ -13,20 +13,34 @@ use Illuminate\Validation\Rules;
 
 class ApiRegisterController extends Controller
 {
-    public function register(ApiRegisterRequest $request)
+    public function register(Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'string', 'lowercase', 'email'],
-            'password' => ['required', 'confirmed']
-        ]);
-
-        User::create($data);
-
-        return response()->json([
-            'status' => true,
-            'message' => "Regisztráció sikeres!"
-        ]);
-
+        try {
+            $data = $request->validate([
+                'name' => ['required', 'string'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'unique:users,email'],
+                'password' => ['required', 'confirmed'],
+            ]);
+        
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        
+            Auth::login($user);
+        
+            return response()->json([
+                'status' => true,
+                'message' => "Regisztráció sikeres!",
+                'user' => $user
+            ], 201);
+        
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Hiba történt a regisztráció során.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
