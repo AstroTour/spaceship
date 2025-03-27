@@ -17,13 +17,13 @@ class ApiRegisterController extends Controller
     {
         try {
             $data = $request->validate([
-                'name' => ['required', 'string'],
+                'username' => ['required', 'string'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'unique:users,email'],
                 'password' => ['required', 'confirmed'],
             ]);
-        
+            
             $user = User::create([
-                'name' => $data['name'],
+                'username' => $data['username'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
