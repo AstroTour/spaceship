@@ -45,6 +45,7 @@ class ReservationsController extends Controller
             'schedule_id' => 'required|exists:schedules,id',
             'ticket_type' => 'required|in:Basic,VIP',
             'seat'        => 'required|boolean', // true = ablak melletti, false = folyosó melletti
+            'total'       => 'required|integer|min:0'
         ]);
     
         // Ha ablak melletti helyet kér (seat = true), ellenőrizni kell a foglaltságot
@@ -73,7 +74,8 @@ class ReservationsController extends Controller
             'schedule_id' => $validatedData['schedule_id'],
             'user_id'     => auth()->id(),
             'seat'        => $validatedData['seat'],
-            'ticket_type' => $validatedData['ticket_type']
+            'ticket_type' => $validatedData['ticket_type'],
+            'total'       => $validatedData['total'],
         ]);
         
         return response()->json([

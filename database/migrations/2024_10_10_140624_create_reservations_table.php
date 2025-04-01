@@ -26,6 +26,7 @@ return new class extends Migration
 
             $table->boolean('seat')->default(false); // true -> ablak melletti, false -> nem ablak melletti
             $table->string('ticket_type')->default('basic'); // basic, vip
+            $table->integer('total')->default(0);
             $table->timestamps();
         });
     }
