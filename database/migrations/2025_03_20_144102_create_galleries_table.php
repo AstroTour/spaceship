@@ -44,23 +44,23 @@ return new class extends Migration
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro7.jpg'
+            'img' => 'gallery/astro7.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro8.jpg'
+            'img' => 'gallery/astro8.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro9.jpg'
+            'img' => 'gallery/astro9.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro10.jpg'
+            'img' => 'gallery/astro10.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro11.jpg'
+            'img' => 'gallery/astro11.png'
         ]);
 
         Gallery::create([
@@ -76,19 +76,19 @@ return new class extends Migration
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro15.jpg'
+            'img' => 'gallery/astro15.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro16.jpg'
+            'img' => 'gallery/astro16.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro17.jpg'
+            'img' => 'gallery/astro17.png'
         ]);
 
         Gallery::create([
-            'img' => 'gallery/astro18.jpg'
+            'img' => 'gallery/astro18.png'
         ]);
     }
 
