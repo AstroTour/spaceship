@@ -52,6 +52,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/reservation', [ReservationsController::class, 'store']);
     Route::get('/avatar', [AvatarController::class, 'index']);
     Route::post('/avatarUpdate', [UserController::class, 'updateAvatar']);
+    Route::get('/avatarInsert', [AvatarController::class, 'avatarInsert']);
 });
  
 Route::middleware(['auth:sanctum', Admin::class])

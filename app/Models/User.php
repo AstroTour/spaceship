@@ -59,4 +59,9 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
+    public function avatar()
+    {
+        return $this->belongsTo(Avatar::class);
+    }
+
 }
