@@ -12,7 +12,8 @@ class Reservation extends Model
         'schedule_id',
         'user_id',
         'seat',
-        'ticket_type'
+        'ticket_type',
+        'total'
     ];
 
 
