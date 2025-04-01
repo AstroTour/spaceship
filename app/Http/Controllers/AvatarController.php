@@ -10,6 +10,12 @@ class AvatarController extends Controller
     
     public function index()
     {
-        return response()->json(Avatar::pluck('image'));
+        $images = Avatar::all()->map(function ($image) {
+            return [
+                'url' => url($image->image),
+            ];
+        });
+
+        return response()->json($images);
     }
 }
