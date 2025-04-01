@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class AvatarController extends Controller
 {
+    
     public function index()
     {
-        return response()->json(Avatar::all());
+        return response()->json(Avatar::pluck('image'));
     }
 }
