@@ -82,4 +82,24 @@ class UserController extends Controller
         ]);
     }
 
+    public function updateAvatar(Request $request)
+    {
+        if (!auth()->check()) {
+            return response()->json(['message' => 'Felhasználó nincs bejelentkezve!'], 401);
+        }
+
+        $validatedData = $request->validate([
+            'avatar_id' => 'required|exists:avatars,id'
+        ]);
+
+        $user = auth()->user();
+        $user->avatar_id = $validatedData['avatar_id'];
+        $user->save();
+
+        return response()->json([
+            'message' => 'Avatar sikeresen frissítve!',
+            'user' => $user,
+        ], 200);
+    }
+
 }

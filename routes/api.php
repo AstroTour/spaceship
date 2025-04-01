@@ -15,6 +15,7 @@ use \App\Http\Controllers\Api\ApiLoginController;
 use \App\Http\Controllers\Api\ApiRegisterController;
 use \App\Http\Controllers\FaqsController;
 use \App\Http\Controllers\AdminController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\GalleryController;
 use \App\Http\Controllers\ReservationsController;
  
@@ -49,6 +50,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/update', [UserController::class, 'update']);
     Route::get('/datainsert', [UserController::class, 'userDataInsert']);
     Route::post('/reservation', [ReservationsController::class, 'store']);
+    Route::get('/avatar', [AvatarController::class, 'index']);
+    Route::post('/avatarUpdate', [UserController::class, 'updateAvatar']);
 });
  
 Route::middleware(['auth:sanctum', Admin::class])
