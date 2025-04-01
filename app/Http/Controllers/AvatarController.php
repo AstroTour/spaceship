@@ -27,6 +27,7 @@ class AvatarController extends Controller
             'username' => $user->username,
             'email' => $user->email,
             'profile_image' => $user->avatar ? url($user->avatar->image) : null,
+            'role' => $user->role,
         ]);
     }
 }
