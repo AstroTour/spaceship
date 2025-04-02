@@ -176,14 +176,15 @@ table tbody tr:hover {
 }
 
 
-@media (max-width: 768px) {
-    
-    .form-label, .form-select, .form-control {
-        width: 100%;
+@media (max-width: 767px) {
+    .tablet-responsive {
+        display: none !important;
     }
+}
 
-    
-    .table-responsive {
-        overflow-x: auto;
+
+@media (min-width: 768px) {
+    .tablet-responsive {
+        display: block !important;
     }
 }
