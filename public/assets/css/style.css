@@ -171,6 +171,11 @@ table tbody tr:hover {
 }
 
 
+.font-color {
+    color: white;
+}
+
+
 @media (max-width: 768px) {
     
     .form-label, .form-select, .form-control {
