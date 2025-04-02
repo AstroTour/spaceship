@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="">
+    <div class="table-responsive">
         <h1 class="text-center">Foglalások</h1>
         <table class="">
             <thead class="">
@@ -20,7 +20,7 @@
             @forelse ($reservations as $reservation)
                 <tr>
                     <td>{{ $reservation->id }}</td>
-                    <td>{{ $reservation->username }}</td>
+                    <td>{{ $reservation->schedule_id }}</td>
                     <td>{{ $reservation->email }}</td>
                     <td>{{ $reservation->planet_name }}</td>
                     <td>{{ $reservation->flight_number }}</td>

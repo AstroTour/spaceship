@@ -169,3 +169,22 @@ table tbody tr:hover {
     align-items: center;
     gap: 10px;
 }
+
+
+.font-color {
+    color: white;
+}
+
+
+@media (max-width: 767px) {
+    .table-responsive {
+        display: none !important;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .table-responsive {
+        display: block !important;
+    }
+}
