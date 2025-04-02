@@ -87,46 +87,52 @@ class ReservationsController extends Controller
     public function getReservationData()
     {
         $userId = auth()->id();
-
         $now = now();
 
-        $reservation = Reservation::where('user_id', $userId)
+        $reservations = Reservation::where('user_id', $userId)
             ->whereHas('schedule', function ($query) use ($now) {
                 $query->where('arrival_time', '>=', $now);
             })
             ->with([
                 'schedule.flight' => function ($query) {
-                    $query->with(['destinationSpaceport.planet', 'destinationSpaceport', 'spaceship.spaceshipSeats']);
+                    $query->with([
+                        'destinationSpaceport.planet',
+                        'destinationSpaceport',
+                        'spaceship.spaceshipSeats'
+                    ]);
                 },
                 'user'
             ])
-            ->first();
+            ->get();
 
-        if (!$reservation) {
-            return response()->json(['message' => 'Jelenleg nincs foglalásod!'], 404);
+        if ($reservations->isEmpty()) {
+            return response()->json([], 200);
         }
 
-        $flight = $reservation->schedule->flight;
-        $spaceshipSeats = $flight->spaceship->spaceshipSeats;
+        $results = $reservations->map(function ($reservation) {
+            $flight = $reservation->schedule->flight;
+            $spaceshipSeats = $flight->spaceship->spaceshipSeats;
+            $randomSeat = $spaceshipSeats->isNotEmpty() ? $spaceshipSeats->random()->seat_name : 'Nincs elérhető ülés!';
 
-        $randomSeat = $spaceshipSeats->isNotEmpty() ? $spaceshipSeats->random()->seat_name : 'Nincs elérhető ülés!';
+            return [
+                'user_name' => $reservation->user->username,
+                'user_email' => $reservation->user->email,
+                'reservation_id' => $reservation->id,
+                'schedule_id' => $reservation->schedule_id,
+                'planet_name' => $flight->destinationSpaceport->planet->name,
+                'spaceport_name' => $flight->destinationSpaceport->name,
+                'flight_number' => $flight->flight_number,
+                'departure_time' => $reservation->schedule->departure_time,
+                'arrival_time' => $reservation->schedule->arrival_time,
+                'return_time' => $reservation->schedule->comes_back,
+                'spaceship_name' => $flight->spaceship->name,
+                'seat_name' => $randomSeat,
+                'total' => $reservation->total,
+                'ticket_type' => $reservation->ticket_type
+            ];
+        });
 
-        return response()->json([
-            'user_name' => $reservation->user->username,
-            'user_email' => $reservation->user->email,
-            'reservation_id' => $reservation->id,
-            'schedule_id' => $reservation->schedule_id,
-            'planet_name' => $flight->destinationSpaceport->planet->name,
-            'spaceport_name' => $flight->destinationSpaceport->name,
-            'flight_number' => $flight->flight_number,
-            'departure_time' => $reservation->schedule->departure_time,
-            'arrival_time' => $reservation->schedule->arrival_time,
-            'return_time' => $reservation->schedule->comes_back,
-            'spaceship_name' => $flight->spaceship->name,
-            'seat_name' => $randomSeat,
-            'total' => $reservation->total,
-            'ticket_type' => $reservation->ticket_type
-        ]);
+        return response()->json($results);
     }
 
     public function reservationDelete(Request $request)
