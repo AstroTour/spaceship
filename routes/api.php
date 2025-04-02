@@ -50,6 +50,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/update', [UserController::class, 'update']);
     Route::get('/datainsert', [UserController::class, 'userDataInsert']);
     Route::post('/reservation', [ReservationsController::class, 'store']);
+    Route::get('/reservationData', [ReservationsController::class, 'getReservationData']);
+    Route::post('/reservationDelete', [ReservationsController::class, 'reservationDelete']);
     Route::get('/avatar', [AvatarController::class, 'index']);
     Route::post('/avatarUpdate', [UserController::class, 'updateAvatar']);
     Route::get('/avatarInsert', [AvatarController::class, 'avatarInsert']);

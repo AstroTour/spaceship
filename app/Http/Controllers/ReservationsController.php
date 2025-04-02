@@ -84,4 +84,69 @@ class ReservationsController extends Controller
         ], 201);
     }
 
+    public function getReservationData()
+    {
+        $userId = auth()->id();
+
+        $now = now();
+
+        $reservation = Reservation::where('user_id', $userId)
+            ->whereHas('schedule', function ($query) use ($now) {
+                $query->where('arrival_time', '>=', $now);
+            })
+            ->with([
+                'schedule.flight' => function ($query) {
+                    $query->with(['destinationSpaceport.planet', 'destinationSpaceport', 'spaceship.spaceshipSeats']);
+                },
+                'user'
+            ])
+            ->first();
+
+        if (!$reservation) {
+            return response()->json(['message' => 'Jelenleg nincs foglalásod!'], 404);
+        }
+
+        $flight = $reservation->schedule->flight;
+        $spaceshipSeats = $flight->spaceship->spaceshipSeats;
+
+        $randomSeat = $spaceshipSeats->isNotEmpty() ? $spaceshipSeats->random()->seat_name : 'Nincs elérhető ülés!';
+
+        return response()->json([
+            'user_name' => $reservation->user->username,
+            'user_email' => $reservation->user->email,
+            'reservation_id' => $reservation->id,
+            'schedule_id' => $reservation->schedule_id,
+            'planet_name' => $flight->destinationSpaceport->planet->name,
+            'spaceport_name' => $flight->destinationSpaceport->name,
+            'flight_number' => $flight->flight_number,
+            'departure_time' => $reservation->schedule->departure_time,
+            'arrival_time' => $reservation->schedule->arrival_time,
+            'return_time' => $reservation->schedule->comes_back,
+            'spaceship_name' => $flight->spaceship->name,
+            'seat_name' => $randomSeat,
+            'total' => $reservation->total,
+            'ticket_type' => $reservation->ticket_type
+        ]);
+    }
+
+    public function reservationDelete(Request $request)
+    {
+        $userId = $request->user()->id;
+        $now = now();
+
+        $reservation = Reservation::where('user_id', $userId)
+            ->whereHas('schedule', function ($query) use ($now) {
+                $query->where('departure_time', '>=', $now);
+            })
+            ->first();
+
+        if (!$reservation) {
+            return response()->json(['message' => 'Nincs foglalás!'], 404);
+        }
+
+        $reservation->delete();
+
+        return response()->json(['message' => 'Foglalás törlése sikeres!']);
+    }
+
 }
