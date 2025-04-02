@@ -32,7 +32,7 @@ require __DIR__.'/auth.php';
  
 Route::middleware(['auth', Admin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-    Route::get('/admin/admin/user-search', [AdminController::class, 'userSearch'])->name('admin.user.search');
+    Route::get('/admin/user-search', [AdminController::class, 'userSearch'])->name('admin.user.search');
     Route::post('/admin/schedules', [AdminController::class, 'adminSchedulesCreate'])->name('schedules.store');
     Route::get('/admin/schedules-list', [AdminController::class, 'adminSchedules'])->name('schedules.index');
     Route::delete('/admin/schedules/{id}', [AdminController::class, 'adminScheduleDestroy'])->name('schedules.destroy');

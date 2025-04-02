@@ -81,7 +81,7 @@ class AdminController extends Controller
             'goes_back' => 'required|date|after:arrival_time',
             'comes_back' => 'required|date|after:goes_back',
             'flights_id' => 'required|exists:flights,id',
-            'spaceship_id' => 'required|exists:spaceships,id',
+            
         ]);
     
     
