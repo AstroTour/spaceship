@@ -10,7 +10,7 @@
 </head>
 
 
-<body>
+<body class ="table-responsive">
 
 <div class="navbar-container">
     <span class="navbar-brand">AstroTour</span>

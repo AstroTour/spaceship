@@ -177,14 +177,14 @@ table tbody tr:hover {
 
 
 @media (max-width: 767px) {
-    .tablet-responsive {
+    .table-responsive {
         display: none !important;
     }
 }
 
 
 @media (min-width: 768px) {
-    .tablet-responsive {
+    .table-responsive {
         display: block !important;
     }
 }
