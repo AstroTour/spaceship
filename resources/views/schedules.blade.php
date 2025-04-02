@@ -25,6 +25,9 @@
                     <input type="datetime-local" name="comes_back" id="comes_back" class="form-control  date-picker" required>
                 </div>
             </div>
+
+            
+
             <div class="row mt-3">
                 <div class="col-md-12">
                     <label for="flights_id" class="form-label">Járat:</label>
@@ -42,7 +45,7 @@
         </form>
     </div>
 
-    <div class="">
+    <div class="table-responsive">
         <h1 class="text-center">Menetrendek Listája</h1>
         @if (session('success'))
             <div class="alert alert-success">
@@ -58,6 +61,7 @@
                 <th>Visszaindulás</th>
                 <th>Visszaérkezés</th>
                 <th>Járat ID</th>
+                <th>Űrhajó</th>
                 <th>Művelet</th>
             </tr>
             </thead>
@@ -70,6 +74,7 @@
                     <td>{{ $schedule->goes_back }}</td>
                     <td>{{ $schedule->comes_back }}</td>
                     <td>{{ $schedule->flights_id }}</td>
+                    <td>{{ $schedule->flight->spaceship->name ?? 'N/A' }}</td>
                     <td class="text-center align-middle">
                         <form action="{{ route('schedules.destroy', $schedule->id) }}" method="POST">
                             @csrf

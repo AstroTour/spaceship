@@ -32,13 +32,14 @@ require __DIR__.'/auth.php';
  
 Route::middleware(['auth', Admin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-    Route::get('/admin/user-search', [AdminController::class, 'userSearch'])->name('admin.user.search');
-    Route::post('/schedules', [AdminController::class, 'adminSchedulesCreate'])->name('schedules.store');
-    Route::get('/schedules-list', [AdminController::class, 'adminSchedules'])->name('schedules.index');
-    Route::delete('/schedules/{id}', [AdminController::class, 'adminScheduleDestroy'])->name('schedules.destroy');
-    Route::post('/cleanup-schedules', [AdminController::class, 'adminSchedulesCleanup'])->name('schedules.cleanup');
-    Route::get('/reservations', [AdminController::class, 'adminReservations'])->name('reservations.index');
-    Route::get('/spaceships-management', [AdminController::class, 'adminSpaceships']);
+    Route::get('/admin/admin/user-search', [AdminController::class, 'userSearch'])->name('admin.user.search');
+    Route::post('/admin/schedules', [AdminController::class, 'adminSchedulesCreate'])->name('schedules.store');
+    Route::get('/admin/schedules-list', [AdminController::class, 'adminSchedules'])->name('schedules.index');
+    Route::delete('/admin/schedules/{id}', [AdminController::class, 'adminScheduleDestroy'])->name('schedules.destroy');
+    Route::post('/admin/cleanup-schedules', [AdminController::class, 'adminSchedulesCleanup'])->name('schedules.cleanup');
+    Route::get('/admin/reservations', [AdminController::class, 'adminReservations'])->name('reservations.index');
+    Route::get('/admin/spaceships-management', [AdminController::class, 'adminSpaceships']);
+    Route::post('/admin/spaceship-create', [AdminController::class, 'adminSpaceshipsCreate'])->name('spaceships.create');
 });
  
  
@@ -58,6 +59,6 @@ Route::get('/admin-debug', function () {
  
  
 Route::middleware(['auth', SuperAdmin::class])->group(function () {
-    Route::delete('users/{id}', [AdminController::class, 'destroy'])->name('users.delete-user');
-    Route::post('/users/{id}/update-role', [AdminController::class, 'updateRole'])->name('users.update-role');
+    Route::delete('/amdin/users/{id}', [AdminController::class, 'destroy'])->name('users.delete-user');
+    Route::post('/admin/users/{id}/update-role', [AdminController::class, 'updateRole'])->name('users.update-role');
 });

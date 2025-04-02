@@ -28,5 +28,10 @@ class Schedule extends Model
     }
 
 
+    public function spaceship()
+    {
+        return $this->belongsTo(Spaceship::class);
+    }
+
 
 }

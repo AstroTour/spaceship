@@ -16,9 +16,9 @@
     <span class="navbar-brand">AstroTour</span>
     <nav class="navbar">
         <a href="{{ url('/admin') }}">Felhasználók</a>
-        <a href="{{ url('/schedules-list') }}">Menetrendek</a>
-        <a href="{{ url('/reservations') }}">Foglalások</a>
-        <a href="{{ url('/spaceships-management') }}">Űrhajók</a>
+        <a href="{{ url('/admin/schedules-list') }}">Menetrendek</a>
+        <a href="{{ url('/admin/reservations') }}">Foglalások</a>
+        <a href="{{ url('/admin/spaceships-management') }}">Űrhajók</a>
     </nav>
 </div>
 
