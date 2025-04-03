@@ -124,10 +124,30 @@ class AdminController extends Controller
 
     public function adminReservations()
     {
-        $reservations = Reservation::with(['user', 'flight.schedule'])
-            ->get();
+        $reservations = DB::table('reservations')
+        ->join('users', 'reservations.user_id', '=', 'users.id')
+        ->join('schedules', 'reservations.schedule_id', '=', 'schedules.id')
+        ->join('flights', 'schedules.flights_id', '=', 'flights.id')
+        ->join('spaceships', 'flights.spaceship_id', '=', 'spaceships.id')
+        ->join('spaceports as destination', 'flights.destination_spaceport_id', '=', 'destination.id')
+        ->join('planets as destination_planet', 'destination.planet_id', '=', 'destination_planet.id')
+        ->select(
+            'reservations.id',
+            'users.username',
+            'users.email',
+            'destination_planet.name as planet_name',
+            'flights.flight_number',
+            'schedules.id as schedule_id',
+            'spaceships.name as spaceship_name',
+            'reservations.seat',
+            'schedules.departure_time',
+            'schedules.arrival_time',
+            'schedules.goes_back',
+            'schedules.comes_back'
+        )
+        ->get();
 
-        return view('reservations', compact('reservations'));
+    return view('reservations', compact('reservations'));
     }
 
 
