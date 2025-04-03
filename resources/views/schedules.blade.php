@@ -46,7 +46,7 @@
     </div>
 
     <div class="table-responsive">
-        <h1 class="text-center">Menetrendek Listája</h1>
+        <h1 class="text-center">Menetrend Listája</h1>
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -79,7 +79,7 @@
                         <form action="{{ route('schedules.destroy', $schedule->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Biztosan törölni szeretnéd?')">Törlés</button>
+                            <button type="submit" class="btn-delete" onclick="return confirm('Biztosan törölni szeretnéd?')">Törlés</button>
                         </form>
                     </td>
                 </tr>
@@ -90,9 +90,10 @@
             @endforelse
             </tbody>
         </table>
-        <form action="{{ route('schedules.cleanup') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-danger">Lejárt menetrendek törlése</button>
-        </form>
+        
     </div>
+    <form action="{{ route('schedules.cleanup') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn-delete">Lejárt menetrendek törlése</button>
+    </form>
 @endsection
