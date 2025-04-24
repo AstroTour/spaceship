@@ -43,6 +43,7 @@ class FlightsController extends Controller
             ->join('schedules as s', 'f.id', '=', 's.flights_id')
             ->join('spaceports as sp', 'f.destination_spaceport_id', '=', 'sp.id')
             ->join('planets as p', 'sp.planet_id', '=', 'p.id')
+            ->where('s.departure_time', '>', now())
             ->select(
                 'f.flight_number',
                 's.departure_time',
