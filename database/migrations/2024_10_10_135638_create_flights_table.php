@@ -40,25 +40,66 @@ return new class extends Migration
 
         Flight::create([
             'flight_number' => 'AD154',
-            'to_time' => 'dgpwdngpkwdngwdpwngőwrng',
-            'from_time' => 'wdwpwjgőowgőw',
+            'to_time' => '~7 hónap',
+            'from_time' => '~7 hónap',
             'departure_spaceport_id' => 3,
             'destination_spaceport_id' => 4,
             'spaceship_id' => 2,
         ]);
 
         Flight::create([
-            'flight_number' => 'AD191',
-            'to_time' => 'dgpwdngpkwdngwdpwngőwrngfekfe',
-            'from_time' => 'wdwpwjgőowgőwdkcmeő',
+            'flight_number' => 'GH191',
+            'to_time' => '~8,5 év',
+            'from_time' => '~8,5 év',
             'departure_spaceport_id' => 3,
             'destination_spaceport_id' => 7,
             'spaceship_id' => 5,
         ]);
 
+        Flight::create([
+            'flight_number' => 'EX202',
+            'to_time' => '~6 év',
+            'from_time' => '~6 év',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 5,
+            'spaceship_id' => 6,
+        ]);
+        
+        Flight::create([
+            'flight_number' => 'CI225',
+            'to_time' => '~6,5 év',
+            'from_time' => '~6,5 év',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 1,
+            'spaceship_id' => 6,
+        ]);
 
+        Flight::create([
+            'flight_number' => 'MA203',
+            'to_time' => '~12 év',
+            'from_time' => '~12 év',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 8,
+            'spaceship_id' => 5,
+        ]);
 
+        Flight::create([
+            'flight_number' => 'TT211',
+            'to_time' => '~15 hónap',
+            'from_time' => '~15 hónap',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 2,
+            'spaceship_id' => 1,
+        ]);
 
+        Flight::create([
+            'flight_number' => 'KK161',
+            'to_time' => '~7 év',
+            'from_time' => '~7 év',
+            'departure_spaceport_id' => 3,
+            'destination_spaceport_id' => 6,
+            'spaceship_id' => 4,
+        ]);
     }
 
     /**
